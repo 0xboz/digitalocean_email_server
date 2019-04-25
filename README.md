@@ -1,6 +1,6 @@
 # DigitalOcean Email Server
 A simple email server over a DigitalOcean $5/month droplet (Debian 9)
-![mail-tester](https://imgur.com/JDTDAu5)
+![mail-tester](https://i.imgur.com/JDTDAu5.png)
 ## Features
 * [x]  DKIM enabled verification
 * [x]  SPF enabled verification
