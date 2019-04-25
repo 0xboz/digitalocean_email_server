@@ -4,6 +4,7 @@ A simple email server over a DigitalOcean $5/month droplet (Debian 9)
 ## Features
 * [x]  DKIM enabled verification
 * [x]  SPF enabled verification
+* [x]  DMARC policy enabled
 * [x]  TLS enabled in Postfix
 * [x]  'Catch All' forwarding
 
@@ -15,9 +16,18 @@ A simple email server over a DigitalOcean $5/month droplet (Debian 9)
 > ns3.digitalocean.com  
 
 ## How-to
-* Log into DigtialOcean and add a new domain
+* Log into DigtialOcean and add a new domain ***example.com***  
+* Create a droplet named ***example.com***
 * DNS configuration
-
+  * A Record  
+    > @         *DROPLET_IP*  
+    > www       *DROPLET_IP*  
+  * MX Record
+    > @         *example.com*  
+  * SPF TXT Record
+    > @         *"v=spf1 a mx ~all"*  
+  * DMARC TXT Record  
+    > _dmarc    *"v=DMARC1; p=none"*  
 * SSH into the droplet and install git
 ```
 apt install -y git
@@ -28,7 +38,7 @@ git clone https://github.com/0xboz/digitalocean_email_server.git
 chmod +x -R digitalocean_email_server
 cd digitalocean_email_server
 ```
-* Optional: initial setup
+* Initial server setup
 ```
 ./set_up_server.sh
 ```
@@ -36,3 +46,7 @@ cd digitalocean_email_server
 ```
 ./install_email_server.sh
 ```
+* Add DKIM public to DNS record
+  * mail._domainkey     *"v=DKIM1; k=rsa; ..."*
+
+DKIM public key is shown at the end of the installation script. A copy is also located at ```/root/DNS.conf```
