@@ -1,7 +1,13 @@
 # DigitalOcean Email Server
-A simple email server over a DigitalOcean $5/month droplet (Debian 9)
+
+A simple email server over a DigitalOcean $5/month droplet (Debian 9)  
+
+Questions? Join [0xboz's Discord](https://discord.gg/JHt7UQu).  
+
 ![mail-tester](https://i.imgur.com/JDTDAu5.png)
+
 ## Features
+
 * [x]  DKIM enabled verification
 * [x]  SPF enabled verification
 * [x]  DMARC policy enabled
@@ -9,13 +15,17 @@ A simple email server over a DigitalOcean $5/month droplet (Debian 9)
 * [x]  'Catch All' forwarding
 
 ## Prerequisite
+
 * A top-level domain. Get one at [namecheap.com](https://www.namecheap.com/)
+
 * Name server pointing to ([Instructions](https://www.namecheap.com/support/knowledgebase/article.aspx/767/10/how-to-change-dns-for-a-domain))
+
 > ns1.digitalocean.com  
 > ns2.digitalocean.com  
 > ns3.digitalocean.com  
 
 ## How-to
+
 * Log into DigtialOcean and add a new domain ***example.com***  
 * Create a droplet named ***example.com***
 * DNS configuration
@@ -28,24 +38,33 @@ A simple email server over a DigitalOcean $5/month droplet (Debian 9)
     > @         *"v=spf1 a mx ~all"*  
   * DMARC TXT Record  
     > _dmarc    *"v=DMARC1; p=none"*  
+
 * SSH into the droplet and install git
-```
+
+```shell
 apt install -y git
 ```
+
 * Clone this repo
-```
+
+```shell
 git clone https://github.com/0xboz/digitalocean_email_server.git
 chmod +x -R digitalocean_email_server
 cd digitalocean_email_server
 ```
+
 * Initial server setup
-```
+
+```shell
 ./set_up_server.sh
 ```
+
 * Installation
-```
+
+```shell
 ./install_email_server.sh
 ```
+
 * Add DKIM public to DNS record
   * mail._domainkey     *"v=DKIM1; k=rsa; ..."*
 
